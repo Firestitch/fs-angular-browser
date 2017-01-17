@@ -1,0 +1,16 @@
+{
+  "name": "fs-angular-browser",
+  "description": "",
+  "main": [
+    "dist/browser.js"
+  ],
+  "authors": [
+    "Firestitch Inc."
+  ],
+  "license": "MIT",
+  "ignore": [
+    "src",
+    ".gitignore"
+  ],
+  "private": false
+}
