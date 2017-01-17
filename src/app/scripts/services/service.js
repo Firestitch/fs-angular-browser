@@ -1,6 +1,11 @@
 (function () {
     'use strict';
 
+    /**
+     * @ngdoc service
+     * @name fs.fsBrowser
+     */
+
     angular.module('fs-angular-browser',[])
     .factory('fsBrowser', function() {
 
@@ -25,26 +30,64 @@
 
         return service;
 
+
+        /**
+         * @ngdoc method
+         * @name is
+         * @methodOf fs.fsBrowser
+         * @description Tests strings such as chrome, safari, ie, firefox and opera against the current user agent. Returns true if there is a match.
+         * @param {string} browser The name of the browser
+         */
         function is(browser) {
         	return !!self.browser[browser.toLowerCase()];
         }
 
+        /**
+         * @ngdoc method
+         * @name chrome
+         * @methodOf fs.fsBrowser
+         * @description Tests if the browser is chrome
+         */
         function chrome() {
         	return is('chrome');
         }
 
+        /**
+         * @ngdoc method
+         * @name firefox
+         * @methodOf fs.fsBrowser
+         * @description Tests if the browser is firefox
+         */
         function firefox() {
         	return is('firefox');
         }
 
+        /**
+         * @ngdoc method
+         * @name ie
+         * @methodOf fs.fsBrowser
+         * @description Tests if the browser is ie
+         */
         function ie() {
         	return is('ie');
         }
 
+        /**
+         * @ngdoc method
+         * @name safari
+         * @methodOf fs.fsBrowser
+         * @description Tests if the browser is safari
+         */
         function safari() {
         	return is('safari');
         }
 
+        /**
+         * @ngdoc method
+         * @name opera
+         * @methodOf fs.fsBrowser
+         * @description Tests if the browser is opera
+         */
         function opera() {
         	return is('opera');
         }

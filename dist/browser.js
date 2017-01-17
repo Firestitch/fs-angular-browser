@@ -6,7 +6,6 @@
     /**
      * @ngdoc service
      * @name fs.fsBrowser
-     * @description
      */
 
     angular.module('fs-angular-browser',[])
@@ -96,3 +95,4 @@
         }
     });
 })();
+
