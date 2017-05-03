@@ -4,6 +4,9 @@
   "main": [
     "dist/browser.js"
   ],
+  "dependencies": {
+    "fs-angular-util": "^1.0.0"
+  },
   "authors": [
     "Firestitch Inc."
   ],

@@ -8,8 +8,8 @@
      * @name fs.fsBrowser
      */
 
-    angular.module('fs-angular-browser',[])
-    .factory('fsBrowser', function() {
+    angular.module('fs-angular-browser',['fs-angular-util'])
+    .factory('fsBrowser', function(fsUtil) {
 
 		var uagent = navigator.userAgent.toLowerCase(),
 		    match = '',
@@ -28,7 +28,9 @@
 						firefox: firefox,
 						ie: ie,
 						safari: safari,
-						opera: opera };
+						opera: opera,
+						version: version,
+						validate: validate };
 
         return service;
 
@@ -92,6 +94,74 @@
          */
         function opera() {
         	return is('opera');
+        }
+
+        /**
+         * @ngdoc method
+         * @name version
+         * @methodOf fs.fsBrowser
+         * @description Gets the current version of the browser
+         */
+        function version(options) {
+        	options = options || { major: true };
+        	var version;
+        	if(chrome()) {
+        		version = fsUtil.value(uagent.match(/chrome\/([\d\.]+)/),1);
+        	}
+
+        	if(safari()) {
+        		version = fsUtil.value(uagent.match(/safari\/([\d\.]+)/),1);
+        	}
+
+        	if(firefox()) {
+        		version = fsUtil.value(uagent.match(/firefox\/([\d\.]+)/),1);
+        	}
+
+        	if(ie()) {
+        		version = fsUtil.value(uagent.match(/(?:msie:\s+|rv:|edge\/)([\d\.]+)/),1);
+        	}
+
+        	if(opera()) {
+        		version = fsUtil.value(uagent.match(/opera\/?([\d\.]+)/),1);
+        	}
+
+        	if(options.major) {
+        		version = fsUtil.int(fsUtil.value(version.match(/^(\d+)/),1));
+        	}
+
+        	return version;
+        }
+
+        function validate(versions) {
+        	versions = versions || {};
+        	var current = version();
+        	var minimum = 0;
+
+        	if(versions.chrome && chrome()) {
+        		minimum = versions.chrome;
+        	}
+
+        	if(versions.safari && safari()) {
+        		minimum = versions.safari;
+        	}
+
+        	if(versions.firefox && firefox()) {
+        		minimum = versions.firefox;
+        	}
+
+        	if(versions.ie && ie()) {
+        		minimum = versions.ie;
+        	}
+
+        	if(versions.opera && opera()) {
+        		minimum = versions.opera;
+        	}
+
+        	if(minimum>current) {
+        		return false;
+        	}
+
+        	return true;
         }
     });
 })();
