@@ -28,7 +28,8 @@
 						safari: safari,
 						opera: opera,
 						version: version,
-						validate: validate };
+						validate: validate,
+						name: name };
 
         return service;
 
@@ -160,6 +161,40 @@
         	}
 
         	return true;
+        }
+
+        /**
+         * @ngdoc method
+         * @name name
+         * @methodOf fs.fsBrowser
+         * @description Gets the current browser name
+         */
+        function name() {
+        	if(chrome()) {
+        		return 'Chrome';
+        	}
+
+        	if(safari()) {
+        		return 'Safari';
+        	}
+
+        	if(firefox()) {
+        		return 'Firefox';
+        	}
+
+        	if(ie()) {
+
+        		if(version()>=12)
+        			return 'Microsoft Edge';
+
+        		return 'Internet Explorer';
+        	}
+
+        	if(opera()) {
+        		return 'Opera';
+        	}
+
+        	return '';
         }
     });
 })();
