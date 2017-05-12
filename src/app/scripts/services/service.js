@@ -117,7 +117,7 @@
         	}
 
         	if(ie()) {
-        		version = fsUtil.value(uagent.match(/(?:msie:\s+|rv:|edge\/)([\d\.]+)/),1);
+        		version = fsUtil.value(uagent.match(/(?:msie:?\s+|rv:|edge\/)([\d\.]+)/),1);
         	}
 
         	if(opera()) {
@@ -125,7 +125,7 @@
         	}
 
         	if(options.major) {
-        		version = fsUtil.int(fsUtil.value(version.match(/^(\d+)/),1));
+        		version = fsUtil.int(fsUtil.value(fsUtil.string(version).match(/^(\d+)/),1));
         	}
 
         	return version;
@@ -198,3 +198,4 @@
         }
     });
 })();
+
